@@ -1,0 +1,57 @@
+---
+// src/components/Hero.astro
+interface Props {
+  eyebrow?: string;
+  title:    string;   // supports <em> via set:html
+  quote?:   string;
+  height?:  number;
+  class?:   string;
+}
+
+const {
+  eyebrow,
+  title,
+  quote,
+  height = 360,
+  class: extraClass = '',
+} = Astro.props;
+---
+
+<section
+  class={`page-hero ${extraClass}`}
+  style={`min-height:${height}px`}
+  aria-label={title.replace(/<[^>]+>/g, '')}
+>
+  <!-- Wood grain SVG texture -->
+  <svg
+    class="hero-grain-svg"
+    viewBox={`0 0 1200 ${height}`}
+    preserveAspectRatio="xMidYMid slice"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path d="M0 55 Q200 38 400 60 Q650 86 900 46 Q1050 24 1200 52" stroke="#C4872A" stroke-width="1.5" fill="none"/>
+    <path d="M0 115 Q250 98 500 122 Q750 148 1000 108 Q1100 88 1200 116" stroke="#A0693A" stroke-width="1" fill="none"/>
+    <path d="M0 180 Q180 165 360 186 Q560 210 760 170 Q980 134 1200 182" stroke="#6B3D22" stroke-width="2" fill="none"/>
+    <path d="M0 248 Q200 232 400 256 Q650 282 900 240 Q1080 212 1200 250" stroke="#8B5A30" stroke-width="1" fill="none"/>
+    <path d="M0 318 Q220 304 440 326 Q700 352 950 312 Q1080 290 1200 320" stroke="#A0693A" stroke-width="1.5" fill="none"/>
+    <path d="M0 390 Q180 376 360 398 Q600 424 850 384 Q1030 358 1200 392" stroke="#C4872A" stroke-width="1" fill="none"/>
+    <ellipse cx="880" cy="175" rx="46" ry="30" stroke="#8B5A30" stroke-width="1.2" fill="none"/>
+    <ellipse cx="880" cy="175" rx="24" ry="15" stroke="#C4872A" stroke-width="1" fill="none"/>
+    <path d={`M340 0 Q344 ${height/4} 340 ${height/2} Q336 ${height*3/4} 342 ${height}`} stroke="#3D2314" stroke-width="1.5" fill="none" opacity=".5"/>
+  </svg>
+
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+      <h1 class="h-display" set:html={title} />
+    </div>
+    {quote && (
+      <div class="hero-right">
+        <p class="hero-quote">{quote}</p>
+      </div>
+    )}
+  </div>
+</section>

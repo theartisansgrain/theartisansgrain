@@ -1,62 +1,142 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+// src/pages/about.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import BannerStrip from '@components/BannerStrip.astro';
+import { SITE } from '@data/site';
+
+const steps = [
+  ['01','Wood Selection',    'Western red cedar hand-selected for grain, figure, and character.'],
+  ['02','Laser Cutting',     'The bow tie profile precision laser-cut for a clean template.'],
+  ['03','Resin Pour',        'Custom-tinted epoxy mixed and poured into routed channels.'],
+  ['04–07','Epoxy Cure',    'Resin cures undisturbed for several days. We wait.'],
+  ['08','Shaping & Routing', 'The cured piece is hand-shaped and refined.'],
+  ['09','Sanding',           'Multiple grits, coarse to ultra-fine. Epoxy leveled flush.'],
+  ['10','Oil',               'Natural oil worked in by hand. Protects from within.'],
+  ['11','Wax',               'Buffed with finishing wax for a soft natural sheen.'],
+  ['12','Ribbon & Strap',    'Ribbon and adjustable neck strap hand-sewn on.'],
+];
+
+const values = [
+  ['01','No Shortcuts',     "Twelve grits of sandpaper. Three coats of finish. Every single time."],
+  ['02','Honest Materials', "Western red cedar, exclusively. Food-safe epoxy. Hardware that lasts."],
+  ['03','Truly One of One',"No two pieces of cedar grain the same. No two resin pours match."],
+  ['04','Made to Be Worn', "This isn't wall art. It clips on, adjusts, and survives a reception."],
+];
+
+const materials = [
+  ['linear-gradient(135deg,#8B5E3C,#C4924A,#A0703A)','Western Red Cedar','Our Wood · Exclusively','We work exclusively with western red cedar — chosen for its warm, aromatic grain, lightweight feel, and the way it holds a finish.'],
+  ['linear-gradient(135deg,#1B5E8A,#2E86C1,#8E44AD,#C0392B)','Epoxy Resin','Casting Medium','Food-safe, UV-stable casting epoxy. Custom-tinted using professional pigments and mica powders. Every colour is mixed by hand.'],
+  ['linear-gradient(135deg,#2C2C2C,#6B4E3D,#8B7355)','Ribbon & Strap','Finishing Hardware','Hand-sewn ribbon and adjustable neck straps selected to complement each piece. Fitted and tested before every bow tie leaves the shop.'],
+];
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
+<BaseLayout
+  title="About"
+  description="The story behind The Artisan's Grain — handcrafted cedar and epoxy bow ties made one at a time in Cleburne, Texas."
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+  <Hero
+    eyebrow="Our Story"
+    title="Made by Hand.<br><em>Worn with Pride.</em>"
+    quote="Wood remembers the forest. We just help it become something new."
+    height={400}
+  />
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+  <!-- INTRO SPLIT -->
+  <div class="split-grid">
+    <div class="panel-mid">
+      <svg style="position:absolute;inset:0;opacity:.12;width:100%;height:100%;" viewBox="0 0 400 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M0 40 Q100 28 200 45 Q300 62 400 38" stroke="#F5EFE0" stroke-width="1.5" fill="none"/>
+        <path d="M0 120 Q120 106 240 126 Q320 140 400 112" stroke="#F5EFE0" stroke-width="1" fill="none"/>
+        <path d="M0 215 Q80 202 160 220 Q280 240 400 205" stroke="#F5EFE0" stroke-width="2" fill="none"/>
+        <path d="M0 320 Q100 308 200 325 Q300 342 400 315" stroke="#F5EFE0" stroke-width="1" fill="none"/>
+        <path d="M0 420 Q130 408 260 426 Q370 442 400 416" stroke="#F5EFE0" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:20px;">
+        <div style="width:200px;height:200px;border-radius:50%;border:1px solid rgba(245,239,224,.15);display:flex;align-items:center;justify-content:center;background:rgba(30,12,4,.3);">
+          <img src="/images/logo.png" alt={SITE.name} width="160" height="160" style="border-radius:50%;object-fit:contain;" />
+        </div>
+        <div style="font-family:var(--font-serif);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(245,239,224,.35);">
+          {SITE.location} · Est. 2023
+        </div>
+      </div>
+    </div>
+    <div class="panel-light">
+      <div class="eyebrow">Who We Are</div>
+      <h2 class="h-section" style="margin-bottom:22px;">A Workshop, a Passion, and a Pair of Pliers</h2>
+      <p class="body-copy" style="margin-bottom:16px;">The Artisan's Grain began the way most honest things do — quietly, in a garage, with sawdust on the floor and no plan except to make something beautiful. What started as a weekend experiment with scrap cedar and leftover epoxy turned into a genuine obsession with the intersection of natural wood and vivid resin.</p>
+      <p class="body-copy" style="margin-bottom:16px;">Every bow tie we make starts with western red cedar — the only wood we use. We laser-cut the bow tie shape for a clean, precise template, then take over entirely by hand: routing, pouring resin, curing, shaping, sanding, oiling, waxing, and finally sewing the ribbon and neck strap ourselves.</p>
+      <p class="body-copy" style="margin-bottom:28px;">We are not a factory. We are not a fulfillment center. We're a small workshop that takes real time to make one bow tie — and we think that's exactly how it should be.</p>
+      <div style="border-top:1px solid var(--cream-deeper);padding-top:22px;">
+        <div style="font-family:var(--font-serif);font-size:13px;color:var(--brown-light);letter-spacing:.08em;">
+          The Artisan's Grain Team
+          <span style="display:block;font-family:var(--font-sans);font-size:11px;font-weight:400;color:var(--text-mid);letter-spacing:.12em;text-transform:uppercase;margin-top:4px;">{SITE.location}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+  <!-- VALUES -->
+  <section class="section-wrap bg-dark">
+    <div class="eyebrow text-accent" style="text-align:center;margin-bottom:10px;">What Drives Us</div>
+    <h2 class="h-section text-cream" style="text-align:center;margin-bottom:44px;">Our Founding Principles</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(245,239,224,.08);">
+      {values.map(([num, title, desc]) => (
+        <div class="card-dark" style="padding:36px 28px;">
+          <div style="font-family:var(--font-serif);font-size:36px;font-weight:700;color:var(--accent);opacity:.25;margin-bottom:12px;">{num}</div>
+          <div style="font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--cream);margin-bottom:10px;">{title}</div>
+          <p class="text-muted">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+  <!-- PROCESS TIMELINE -->
+  <section class="section-wrap bg-cream">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">How It's Made</div>
+        <h2 class="h-section">Twelve Steps, One Bow Tie</h2>
+      </div>
+      <p class="section-right-note">From cedar selection to sewn ribbon — every step, nothing skipped.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px 8px;">
+      {steps.map(([num, title, desc]) => (
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 8px;">
+          <div style="width:68px;height:68px;border-radius:50%;background:var(--cream);border:2px solid var(--cream-deeper);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+            <span style="font-family:var(--font-serif);font-size:11px;font-weight:700;color:var(--accent);">{num}</span>
+          </div>
+          <div style="font-family:var(--font-serif);font-size:12px;font-weight:600;color:var(--brown);margin-bottom:5px;">{title}</div>
+          <p style="font-family:var(--font-sans);font-size:10px;font-weight:300;color:var(--text-mid);line-height:1.6;">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+  <!-- MATERIALS -->
+  <section class="section-wrap bg-cream-d">
+    <div class="eyebrow">What We Use</div>
+    <h2 class="h-section" style="margin-bottom:40px;">The Materials</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+      {materials.map(([grad, name, type, desc]) => (
+        <div class="card card-accent-border">
+          <div style={`width:48px;height:48px;border-radius:4px;background:${grad};margin-bottom:18px;`}></div>
+          <div class="h-card">{name}</div>
+          <div style="font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">{type}</div>
+          <p class="body-copy" style="font-size:12px;">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <BannerStrip
+    eyebrow="Our Promise"
+    heading="Every Piece, Guaranteed for Life"
+    body="If your bow tie ever chips, cracks, or the hardware fails — send it back. We'll fix it or replace it, no questions asked, no receipt needed."
+    ctaPrimary="Shop the Collection"
+    ctaPrimaryHref="/shop/"
+    ctaSecondary="Commission a Custom Piece"
+    ctaSecondaryHref="/custom-orders/"
+  />
+
+</BaseLayout>

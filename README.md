@@ -1,62 +1,201 @@
-# Astro Starter Kit: Blog
+# Artisan's Grain — Astro Site
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+Static site built with [Astro](https://astro.build) for **The Artisan's Grain** — handcrafted wooden epoxy bow ties, Cleburne, Texas.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+---
 
-<!-- dash-content-start -->
-
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-<!-- dash-content-end -->
-
-## Getting Started
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
+## Quick Start
 
 ```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # output → dist/
+npm run preview    # preview the built site
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+**Node.js 18+** required.
 
-## 🚀 Project Structure
+---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Project Structure
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```
+artisans-grain-astro/
+├── public/
+│   ├── images/
+│   │   └── logo.svg            # Replace with actual Logo_TAG.png
+│   ├── scripts/
+│   │   └── theme.js            # Compiled client-side JS (nav, FAQ, forms)
+│   └── styles/
+│       ├── global.css          # 90% shared styles — design tokens + all components
+│       └── pages/
+│           └── shop.css        # 10% per-page CSS (shop sidebar, policy layout)
+│
+├── src/
+│   ├── components/
+│   │   ├── Hero.astro          # Reusable page hero with wood-grain SVG
+│   │   ├── BannerStrip.astro   # Amber CTA banner strip
+│   │   ├── ProductCard.astro   # Product card (used on shop, home, new arrivals)
+│   │   └── FaqAccordion.astro  # Accessible FAQ accordion
+│   │
+│   ├── data/
+│   │   └── site.ts             # SITE config, PRODUCTS[], TESTIMONIALS[], nav links
+│   │
+│   ├── layouts/
+│   │   └── BaseLayout.astro    # Root layout: <head>, sticky nav, footer
+│   │
+│   ├── pages/
+│   │   ├── index.astro         # Home
+│   │   ├── about.astro         # About / Our Story
+│   │   ├── our-craft.astro     # Our Craft (cedar, laser, handcraft process)
+│   │   ├── custom-orders.astro # Custom Orders + commission form
+│   │   ├── new-arrivals.astro  # New Arrivals + drop history + waitlist
+│   │   ├── gift-cards.astro    # Gift Cards + interactive card preview
+│   │   ├── contact.astro       # Contact + hours + message form
+│   │   ├── shipping-returns.astro # Shipping & Returns policy
+│   │   ├── shop/
+│   │   │   ├── index.astro     # Shop — All Bow Ties (filtered grid + sidebar)
+│   │   │   └── [slug].astro    # Individual product page (dynamic route)
+│   │   └── 404.astro           # Not found
+│   │
+│   ├── scripts/
+│   │   └── theme.ts            # TypeScript source for theme.js
+│   │
+│   └── styles/
+│       ├── global.css          # Source of truth for shared CSS
+│       └── pages/
+│           └── shop.css        # Source of truth for shop/policy CSS
+│
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
+```
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+---
 
-Any static assets, like images, can be placed in the `public/` directory.
+## The 90/10 CSS Architecture
 
-## 🧞 Commands
+Same principle as the WordPress theme:
 
-All commands are run from the root of the project, from a terminal:
+- **`public/styles/global.css`** (~120 rules) — design tokens, typography, nav, hero, cards, buttons, forms, footer, product cards, FAQ, banners, tables, pills, swatches. Does 90% of the visual work on every page.
+- **`public/styles/pages/shop.css`** — the 10%: shop sidebar, product grid, filter bar, policy sidebar, contact layout. Imported only on relevant pages via `<link slot="head">`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run deploy`          | Deploy your production site to Cloudflare        |
+---
 
-## 👀 Want to learn more?
+## Adding / Editing Products
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+All product data lives in `src/data/site.ts`. Each product:
 
-## Credit
+```ts
+{
+  id:         '001',
+  pieceNum:   '047',           // shown as "Piece No. 047"
+  name:       'Midnight Tide',
+  resin:      'Navy & Cobalt Resin',
+  price:      89,
+  inStock:    true,
+  isNew:      true,
+  isLimited:  false,
+  slug:       'midnight-tide', // URL: /shop/midnight-tide/
+  shortDesc:  '...',
+  desc:       '...',
+  resinGrad:  'linear-gradient(135deg,#1a3a5c,#2e6da4)', // swatch + SVG colour
+}
+```
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Adding a new product automatically:
+- Adds it to the shop grid (`/shop/`)
+- Generates a product detail page (`/shop/[slug]/`)
+- Shows it on New Arrivals (if `isNew: true`)
+- Shows it on the homepage featured section
+
+---
+
+## Adding Your Logo
+
+Replace `public/images/logo.svg` with your actual `Logo_TAG.png`:
+
+```bash
+cp /path/to/Logo_TAG.png public/images/logo.png
+```
+
+Then update `src/layouts/BaseLayout.astro` — change all `/images/logo.svg` references to `/images/logo.png`.
+
+---
+
+## Connecting a Backend / CMS
+
+The site is currently fully static with data from `src/data/site.ts`. To connect a real backend:
+
+### Option A — Astro Content Collections
+Move products to `src/content/products/*.md` or `.json` and use `getCollection('products')`.
+
+### Option B — API fetch at build time
+In `src/pages/shop/index.astro`:
+```ts
+const { products } = await fetch('https://your-api.com/products').then(r => r.json());
+```
+
+### Option C — Snipcart / Shopify Buy Button
+Add Snipcart or Shopify's JS snippet to `BaseLayout.astro` and replace the "Add to Cart" buttons.
+
+---
+
+## Forms
+
+Forms currently use a simulated success state (800ms delay then button confirms). To wire them up:
+
+**Contact form** (`src/pages/contact.astro`) → POST to a serverless function:
+```ts
+// Example: Netlify / Vercel serverless function
+const res = await fetch('/api/contact', {
+  method: 'POST',
+  body: new FormData(contactForm),
+});
+```
+
+**Waitlist** (`src/pages/new-arrivals.astro`) → POST to Mailchimp/Klaviyo API endpoint.
+
+---
+
+## Deployment
+
+### Netlify
+```bash
+npm run build
+# Deploy dist/ to Netlify
+# Or: connect GitHub repo → build command: npm run build → publish dir: dist
+```
+
+### Vercel
+```bash
+npx vercel
+# Astro is auto-detected
+```
+
+### GitHub Pages
+```js
+// astro.config.mjs
+export default defineConfig({
+  site: 'https://yourusername.github.io',
+  base: '/your-repo-name',
+});
+```
+
+---
+
+## Site Config
+
+Edit `src/data/site.ts` to update:
+- Site name, tagline, description
+- Contact email
+- Social media URLs
+- Navigation links
+- Footer links
+- Testimonials
+
+---
+
+## License
+
+MIT

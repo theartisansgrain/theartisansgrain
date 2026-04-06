@@ -1,0 +1,150 @@
+---
+// src/pages/shop/[slug].astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProductCard from '@components/ProductCard.astro';
+import BannerStrip from '@components/BannerStrip.astro';
+import { PRODUCTS } from '@data/site';
+
+export function getStaticPaths() {
+  return PRODUCTS.map(p => ({
+    params: { slug: p.slug },
+    props:  { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+const { name, pieceNum, resin, price, inStock, desc, resinGrad, slug } = product;
+
+// Related products (exclude self, take 3)
+const related = PRODUCTS.filter(p => p.slug !== slug).slice(0, 3);
+
+const assurances = [
+  'Numbered & signed on the back',
+  'Ships in 3–5 business days',
+  'Lifetime craftsmanship guarantee',
+  'Gift-ready packaging included',
+];
+---
+
+<BaseLayout
+  title={name}
+  description={`${name} — Piece No. ${pieceNum}. Western Red Cedar · ${resin}. Handcrafted in Cleburne, Texas.`}
+>
+
+  <!-- SHORT HERO -->
+  <div class="page-hero" style="min-height:220px;">
+    <svg class="hero-grain-svg" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0 45 Q200 30 400 52 Q650 78 900 38 Q1050 18 1200 45" stroke="#C4872A" stroke-width="1.5" fill="none"/>
+      <path d="M0 108 Q250 92 500 116 Q750 140 1000 100 Q1100 82 1200 110" stroke="#A0693A" stroke-width="1" fill="none"/>
+      <path d="M0 175 Q180 162 360 180 Q560 200 760 162 Q980 128 1200 177" stroke="#6B3D22" stroke-width="2" fill="none"/>
+    </svg>
+    <div class="hero-overlay"></div>
+    <div class="hero-content" style="padding-bottom:32px;">
+      <div>
+        <div class="eyebrow">Piece No. {pieceNum}</div>
+        <h1 class="h-display" style="font-size:clamp(28px,4vw,44px);">{name}</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL -->
+  <div class="split-grid" style="min-height:480px;">
+
+    <!-- IMAGE / VISUAL -->
+    <div style="background:var(--brown-mid);display:flex;align-items:center;justify-content:center;padding:40px;min-height:420px;position:relative;overflow:hidden;">
+      {!inStock && (
+        <span class="pc-badge pc-badge-sold" style="position:absolute;top:22px;left:22px;z-index:3;">Sold Out</span>
+      )}
+      <!-- SVG bow tie — replace with <img> once photos are available -->
+      <svg viewBox="0 0 360 240" fill="none" style="max-width:320px;width:100%;" aria-label={`${name} bow tie`}>
+        <defs>
+          <linearGradient id="detail-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6B3D22"/>
+          </linearGradient>
+        </defs>
+        <path d="M18 120 C38 72 94 68 180 120 C94 172 38 168 18 120Z" fill="#6B3D22" stroke="#8B5A30" stroke-width="1.5"/>
+        <path d="M342 120 C322 72 266 68 180 120 C266 172 322 168 342 120Z" fill="#6B3D22" stroke="#8B5A30" stroke-width="1.5"/>
+        <path d="M158 90 C166 102 166 138 158 150 L202 150 C194 138 194 102 202 90Z" fill="#5C3418" stroke="#8B5A30" stroke-width="1.5"/>
+        <!-- Grain lines -->
+        <path d="M28 105 Q180 92 332 105" stroke="#A0693A" stroke-width="1.5" fill="none" opacity=".5"/>
+        <path d="M28 120 Q180 107 332 120" stroke="#8B5A30" stroke-width="2" fill="none" opacity=".6"/>
+        <path d="M28 135 Q180 122 332 135" stroke="#A0693A" stroke-width="1.5" fill="none" opacity=".5"/>
+        <!-- Resin band -->
+        <path d="M30 108 Q180 96 330 108" stroke="url(#product-resin)" stroke-width="5" fill="none"/>
+        <path d="M30 118 Q180 106 330 118" stroke="url(#product-resin)" stroke-width="4.5" fill="none" opacity=".85"/>
+        <path d="M30 128 Q180 116 330 128" stroke="url(#product-resin)" stroke-width="4" fill="none" opacity=".7"/>
+        <defs>
+          <linearGradient id="product-resin" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color={resinGrad.includes('#') ? resinGrad.match(/#[0-9a-fA-F]{3,6}/g)?.[0] ?? '#C4872A' : '#C4872A'}/>
+            <stop offset="100%" stop-color={resinGrad.includes('#') ? resinGrad.match(/#[0-9a-fA-F]{3,6}/g)?.[1] ?? '#E8A84A' : '#E8A84A'}/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="panel-light">
+      <div style="font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">
+        Western Red Cedar · {resin}
+      </div>
+
+      <div style="font-family:var(--font-serif);font-size:30px;font-weight:700;color:var(--brown);margin-bottom:18px;">
+        ${price}
+      </div>
+
+      <p class="body-copy" style="margin-bottom:28px;">{desc}</p>
+
+      {inStock ? (
+        <div style="display:flex;gap:14px;margin-bottom:20px;flex-wrap:wrap;">
+          <button class="btn btn-primary" style="flex:1;min-width:160px;" onclick="this.textContent='Added to Cart ✓';this.style.background='var(--brown-mid)'">
+            Add to Cart
+          </button>
+          <button class="btn btn-ghost" style="color:var(--brown);border-color:var(--cream-deeper);">
+            ♡ Wishlist
+          </button>
+        </div>
+      ) : (
+        <>
+          <div style="background:var(--cream-dark);padding:20px;text-align:center;font-family:var(--font-serif);font-size:14px;font-weight:600;color:var(--text-mid);margin-bottom:20px;">
+            This piece has found its home.
+          </div>
+          <a href="/custom-orders/" class="btn btn-primary" style="width:100%;display:block;text-align:center;">
+            Commission a Similar Piece
+          </a>
+        </>
+      )}
+
+      <!-- Assurances -->
+      <div style="border-top:1px solid var(--cream-deeper);margin-top:24px;padding-top:20px;display:flex;flex-direction:column;gap:10px;">
+        {assurances.map(a => (
+          <div style="display:flex;align-items:center;gap:10px;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 7 l3 3 7-7" stroke="#C4872A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span style="font-family:var(--font-sans);font-size:12px;font-weight:300;color:var(--text-mid);">{a}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="section-wrap bg-cream" aria-label="Related pieces">
+    <div class="eyebrow">You Might Also Like</div>
+    <h2 class="h-section" style="margin-bottom:32px;">Other Pieces</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+      {related.map(p => <ProductCard product={p} />)}
+    </div>
+  </section>
+
+  <BannerStrip
+    eyebrow="Want Something Made for You?"
+    heading="Commission a Custom Piece."
+    body="Tell us the occasion, pick a colour direction, and we'll build it from scratch. Same twelve steps, same lifetime guarantee."
+    ctaPrimary="Start a Commission"
+    ctaPrimaryHref="/custom-orders/"
+    ctaSecondary="Browse All Pieces"
+    ctaSecondaryHref="/shop/"
+  />
+
+</BaseLayout>

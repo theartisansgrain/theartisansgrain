@@ -1,0 +1,267 @@
+---
+// src/pages/shipping-returns.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import FaqAccordion from '@components/FaqAccordion.astro';
+
+const shippingRates = [
+  ['USPS First Class',   '3–5 business days', '$6.50',  'US domestic only'],
+  ['USPS Priority Mail', '2–3 business days', '$12.00', 'Includes insurance'],
+  ['UPS Ground',         '3–7 business days', '$10.00', 'Tracking included'],
+  ['UPS 2-Day Air',      '2 business days',   '$22.00', 'Order by 12pm CST'],
+  ['Free Shipping',      '3–5 business days', 'Free',   'Orders over $75 (US only)'],
+];
+
+const processingTimes = [
+  ['Standard Collection',        '3–5 business days', 'In-stock designs finished and inspected'],
+  ['Custom / Commission',        '2–3 weeks',         'Includes resin cure time — cannot be shortened'],
+  ['Groomsmen Sets (3–5 pieces)','3–4 weeks',         'Each piece individually finished'],
+  ['Large Orders (6+)',          '4–6 weeks',         'Contact us before ordering'],
+];
+
+const internationalRates = [
+  ['Canada',                  '7–14 business days',  '$18.00'],
+  ['United Kingdom / Europe', '10–18 business days', '$24.00'],
+  ['Australia / New Zealand', '12–20 business days', '$26.00'],
+  ['Rest of World',           '14–28 business days', '$28.00'],
+];
+
+const returnSteps = [
+  ['Contact Us Within 30 Days', "Email hello@theartisansgrain.com within 30 days of receiving your order. Tell us what's wrong — a photo helps. We'll respond within 48 hours."],
+  ['Ship It Back to Us',        "We'll provide a return shipping address. For defective items, we cover return shipping. For preference-based returns, return shipping is at the buyer's cost."],
+  ['Refund or Exchange',        "Once we receive the item, we'll process your refund or exchange within 5 business days. Refunds go back to the original payment method."],
+];
+
+const repairSteps = [
+  ['Email Us a Photo',      "Send a photo of the issue to hello@theartisansgrain.com. We'll assess it and confirm whether it's covered under the guarantee — usually same day."],
+  ['Send It Back',          "We'll send a prepaid return label. Pack the piece carefully and drop it at any USPS location. We cover all shipping costs for guarantee claims."],
+  ["We Fix It or Replace It","We'll repair the piece if possible. If the damage is beyond repair, we'll build you a new one — same design, same care. Turnaround is 1–3 weeks."],
+];
+
+const faqItems = [
+  {q:"My order arrived damaged. What do I do?",           a:"Email us with a photo of the damage and we'll sort it immediately. You'll get a replacement or refund — whichever you prefer — with no hassle."},
+  {q:"Can I change my shipping address after ordering?",   a:"Yes, as long as the order hasn't shipped yet. Email us as soon as possible with your order number and the correct address."},
+  {q:"My tracking says delivered but I haven't received it.",a:"First check with neighbours and your mailroom. If it doesn't turn up within 48 hours, email us and we'll open a trace. If confirmed lost, we'll build you a replacement at no charge."},
+  {q:"How long do refunds take to process?",               a:"Once we receive your return, we process refunds within 5 business days. Your bank may take an additional 3–7 days. We'll email you when the refund is issued."},
+  {q:"Can I return a bow tie I bought as a gift?",         a:"Yes. The 30-day return window applies from delivery date. Refunds go back to the original payment method unless we arrange store credit or an exchange."},
+];
+
+const quickStats = [
+  ['Free',     'US Shipping over $75'],
+  ['3–5',      'Business Days Standard'],
+  ['Lifetime', 'Craftsmanship Guarantee'],
+  ['30 Days',  'Satisfaction Returns'],
+];
+
+const sections = [
+  ['shipping',       'Shipping'],
+  ['processing',     'Processing Times'],
+  ['international',  'International'],
+  ['packaging',      'Packaging'],
+  ['returns',        'Returns'],
+  ['repairs',        'Repairs & Guarantee'],
+  ['custom-returns', 'Custom Order Returns'],
+  ['faq',            'FAQ'],
+];
+---
+
+<BaseLayout
+  title="Shipping & Returns"
+  description="Straight talk on shipping rates, processing times, returns, and our lifetime craftsmanship guarantee."
+>
+  <link slot="head" rel="stylesheet" href="/styles/pages/shop.css" />
+
+  <Hero
+    eyebrow="Shipping & Returns"
+    title="Straight Talk.<br><em>No Fine Print.</em>"
+    quote="We pack every piece like it's going to someone who matters — because it is."
+    height={280}
+  />
+
+  <!-- QUICK STATS -->
+  <div class="bg-accent" style="padding:0;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+      {quickStats.map(([num, label]) => (
+        <div style="padding:24px 28px;border-right:1px solid rgba(245,239,224,.2);display:flex;align-items:center;gap:14px;">
+          <div>
+            <div class="stat-num" style="color:var(--cream);">{num}</div>
+            <div class="stat-label" style="color:rgba(245,239,224,.7);">{label}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- CONTENT: SIDEBAR + BODY -->
+  <div class="policy-layout">
+
+    <!-- Sticky nav -->
+    <nav class="policy-sidenav" aria-label="Page sections">
+      <div style="font-family:var(--font-serif);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--brown);margin-bottom:16px;opacity:.6;">On This Page</div>
+      {sections.map(([id, label]) => (
+        <a href={`#${id}`} class="policy-nav-link">{label}</a>
+      ))}
+    </nav>
+
+    <div class="policy-body">
+
+      <!-- SHIPPING -->
+      <section class="policy-section" id="shipping">
+        <div class="eyebrow">Getting It to You</div>
+        <h2 class="h-section" style="margin-bottom:16px;">Shipping Rates & Options</h2>
+        <p class="body-copy" style="margin-bottom:20px;">We ship from Cleburne, Texas using USPS and UPS. Every shipment includes a tracking number sent to your email once it leaves the shop.</p>
+        <table class="policy-table">
+          <thead><tr><th>Service</th><th>Delivery</th><th>Cost</th><th>Notes</th></tr></thead>
+          <tbody>
+            {shippingRates.map(r => (
+              <tr><td><strong>{r[0]}</strong></td><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="info-box" style="border-color:#27ae60;background:rgba(39,174,96,.06);">
+          <div class="info-box-title" style="color:#1a6b3a;">Free Shipping on US Orders Over $75</div>
+          <p class="info-box-body">All domestic orders above $75 ship free via USPS Priority Mail. No code needed — applied automatically at checkout.</p>
+        </div>
+      </section>
+
+      <!-- PROCESSING -->
+      <section class="policy-section" id="processing">
+        <div class="eyebrow">Before It Ships</div>
+        <h2 class="h-section" style="margin-bottom:16px;">Processing Times</h2>
+        <p class="body-copy" style="margin-bottom:20px;">Every bow tie is made to order. <strong>Processing time is separate from shipping time</strong> — it's the time it takes to finish building your piece.</p>
+        <table class="policy-table">
+          <thead><tr><th>Order Type</th><th>Processing Time</th><th>Notes</th></tr></thead>
+          <tbody>
+            {processingTimes.map(r => (
+              <tr><td><strong>{r[0]}</strong></td><td>{r[1]}</td><td>{r[2]}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="info-box" style="border-color:#e67e22;background:rgba(230,126,34,.06);">
+          <div class="info-box-title" style="color:#8b4a00;">Have a Hard Deadline?</div>
+          <p class="info-box-body">Wedding date, birthday, event — tell us upfront and we'll give you an honest answer on timing. Reach us at hello@theartisansgrain.com before you order.</p>
+        </div>
+      </section>
+
+      <!-- INTERNATIONAL -->
+      <section class="policy-section" id="international">
+        <div class="eyebrow">Outside the US</div>
+        <h2 class="h-section" style="margin-bottom:16px;">International Shipping</h2>
+        <p class="body-copy" style="margin-bottom:20px;">We ship worldwide via USPS International or UPS International. Delivery times vary by country.</p>
+        <table class="policy-table">
+          <thead><tr><th>Region</th><th>Estimated Delivery</th><th>Starting Cost</th></tr></thead>
+          <tbody>
+            {internationalRates.map(r => (
+              <tr><td><strong>{r[0]}</strong></td><td>{r[1]}</td><td>{r[2]}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="body-copy" style="margin-top:16px;"><strong>Customs & Import Duties:</strong> International buyers are responsible for any customs duties or import taxes. We declare all shipments at full value.</p>
+      </section>
+
+      <!-- PACKAGING -->
+      <section class="policy-section" id="packaging">
+        <div class="eyebrow">How It Arrives</div>
+        <h2 class="h-section" style="margin-bottom:16px;">Packaging</h2>
+        <p class="body-copy" style="margin-bottom:16px;">We don't just throw your bow tie in a poly mailer. Every piece is wrapped in tissue, placed in a rigid gift box, and packed with enough padding to survive the postal service. The unboxing should feel like opening something that matters.</p>
+        <p class="body-copy">Every bow tie ships with a small card that includes the piece number, the date it was made, and a note from the workshop. It's written by hand when the order comes in.</p>
+        <div class="info-box" style="border-color:#27ae60;background:rgba(39,174,96,.06);margin-top:20px;">
+          <div class="info-box-title" style="color:#1a6b3a;">Gift-Ready by Default</div>
+          <p class="info-box-body">Every order ships gift-ready — no extra charge. If you want a personalised note included, add it in the order notes at checkout and we'll write it in by hand.</p>
+        </div>
+      </section>
+
+      <!-- RETURNS -->
+      <section class="policy-section" id="returns">
+        <div class="eyebrow">If It's Not Right</div>
+        <h2 class="h-section" style="margin-bottom:16px;">Returns & Exchanges</h2>
+        <p class="body-copy" style="margin-bottom:24px;">We stand behind every piece we make. If something isn't right, we want to fix it — not hide behind policy language.</p>
+        {returnSteps.map((s, i) => (
+          <div class="process-step" style="margin-bottom:2px;">
+            <span class="ps-number">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <div class="ps-title">{s[0]}</div>
+              <p class="ps-desc">{s[1]}</p>
+            </div>
+          </div>
+        ))}
+        <div class="info-box" style="margin-top:20px;">
+          <div class="info-box-title">What's Eligible for Return</div>
+          <p class="info-box-body">Standard collection items: eligible within 30 days, unworn. Items damaged in shipping: eligible any time. Custom orders: see the custom returns section below. Sale items: final sale unless defective.</p>
+        </div>
+      </section>
+
+      <!-- REPAIRS & GUARANTEE -->
+      <section class="policy-section" id="repairs">
+        <div class="eyebrow">Our Promise</div>
+        <h2 class="h-section" style="margin-bottom:16px;">Repairs & Lifetime Guarantee</h2>
+        <p class="body-copy" style="margin-bottom:16px;">Every bow tie carries a <strong>lifetime craftsmanship guarantee</strong>. If a piece ever chips, cracks, has the resin separate, or the hardware fails — send it back. We'll repair it or replace it. No receipt required. No questions asked.</p>
+        {repairSteps.map((s, i) => (
+          <div class="process-step" style="margin-bottom:2px;">
+            <span class="ps-number">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <div class="ps-title">{s[0]}</div>
+              <p class="ps-desc">{s[1]}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <!-- CUSTOM RETURNS -->
+      <section class="policy-section" id="custom-returns">
+        <div class="eyebrow">Commission Orders</div>
+        <h2 class="h-section" style="margin-bottom:16px;">Custom Order Returns</h2>
+        <p class="body-copy" style="margin-bottom:16px;">Custom and commission pieces are built specifically to your specifications. Because of this, <strong>custom orders are not eligible for returns or exchanges based on preference</strong>.</p>
+        <p class="body-copy">If a custom piece has a defect in craftsmanship, the lifetime guarantee applies in full. We will repair or replace it at no cost.</p>
+        <div class="info-box" style="border-color:#e67e22;background:rgba(230,126,34,.06);margin-top:20px;">
+          <div class="info-box-title" style="color:#8b4a00;">Getting It Right the First Time</div>
+          <p class="info-box-body">We confirm every custom order before building it — photos of the cedar blank, test swatches of the resin colour, written confirmation of the design. If we made a mistake relative to what we confirmed, we'll make it right immediately.</p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="policy-section" id="faq">
+        <div class="eyebrow">Common Questions</div>
+        <h2 class="h-section" style="margin-bottom:24px;">Shipping & Returns FAQ</h2>
+        <FaqAccordion items={faqItems} />
+      </section>
+
+    </div>
+  </div>
+
+  <!-- GUARANTEE CALLOUT -->
+  <section class="section-wrap bg-dark" style="position:relative;overflow:hidden;">
+    <svg style="position:absolute;inset:0;opacity:.07;width:100%;height:100%;" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0 50 Q300 34 600 58 Q900 82 1200 48" stroke="#C4872A" stroke-width="1" fill="none"/>
+      <path d="M0 170 Q250 154 500 178 Q800 206 1200 168" stroke="#A0693A" stroke-width="1.5" fill="none"/>
+      <path d="M0 280 Q200 265 400 288 Q700 315 1200 275" stroke="#C4872A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="split-grid" style="gap:64px;align-items:center;position:relative;z-index:2;">
+      <div>
+        <div class="eyebrow">The Guarantee</div>
+        <h2 class="h-section text-cream" style="margin-bottom:18px;">Built to Last. Backed Forever.</h2>
+        <p class="text-muted" style="margin-bottom:16px;">Every bow tie is covered for life against defects in materials and craftsmanship. Chip. Crack. Hardware failure. Send it back — we'll fix it or replace it, no questions asked, no receipt needed.</p>
+        <a href="/contact/" class="btn btn-accent" style="margin-top:8px;">Contact Us About a Repair</a>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <svg width="220" height="220" viewBox="0 0 240 240" fill="none" aria-label="Lifetime Guarantee seal">
+          <circle cx="120" cy="120" r="108" stroke="rgba(196,135,42,0.3)" stroke-width="1"/>
+          <path d="M120 22 L138 36 L158 30 L164 50 L182 58 L178 78 L194 90 L184 108 L194 126 L178 136 L182 156 L164 162 L158 182 L138 178 L120 192 L102 178 L82 182 L76 162 L58 156 L62 136 L46 126 L56 108 L46 90 L62 78 L58 58 L76 50 L82 30 L102 36 Z" stroke="rgba(196,135,42,0.35)" stroke-width="1.5" fill="rgba(61,35,20,0.4)"/>
+          <circle cx="120" cy="120" r="60" fill="rgba(61,35,20,0.6)" stroke="rgba(196,135,42,0.3)" stroke-width="1"/>
+          <path d="M96 120 l16 16 32-32" stroke="#C4872A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <div class="bg-accent" style="padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;">
+    <div>
+      <div class="eyebrow" style="color:rgba(245,239,224,.7)">Still Have Questions?</div>
+      <h3 class="h-section text-cream" style="font-size:22px;margin-bottom:8px;">We Answer Every Message.</h3>
+      <p style="font-family:var(--font-sans);font-size:13px;font-weight:300;color:rgba(245,239,224,.8);">Can't find what you need here? Email us — a real person responds within 48 hours, every time.</p>
+    </div>
+    <a href="/contact/" class="btn btn-primary">Contact Us</a>
+  </div>
+
+</BaseLayout>

@@ -1,0 +1,145 @@
+---
+// src/pages/shop/index.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ProductCard from '@components/ProductCard.astro';
+import BannerStrip from '@components/BannerStrip.astro';
+import { PRODUCTS } from '@data/site';
+---
+
+<BaseLayout
+  title="All Bow Ties"
+  description="Browse the full collection of handcrafted western red cedar and epoxy resin bow ties. Every piece numbered, signed, and one of a kind."
+  pageClass="page-shop"
+>
+  <link slot="head" rel="stylesheet" href="/styles/pages/shop.css" />
+
+  <Hero
+    eyebrow="The Collection"
+    title="All Bow Ties.<br><em>All One of a Kind.</em>"
+    quote="Western red cedar, hand-routed resin inlays, finished with oil and wax. Every piece numbered, signed, yours alone."
+    height={320}
+  />
+
+  <!-- FILTER BAR -->
+  <div class="shop-filter-bar" role="search" aria-label="Filter products">
+    <div class="sfb-inner">
+      <span class="eyebrow" style="color:var(--text-mid);letter-spacing:.18em;margin-right:8px;">Filter:</span>
+      <div class="sfb-pills" role="group" aria-label="Filter by style">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="new">New Arrivals</button>
+        <button class="pill" data-filter="classic">Classic Resin</button>
+        <button class="pill" data-filter="galaxy">Galaxy / Shimmer</button>
+        <button class="pill" data-filter="earth">Earth Tones</button>
+      </div>
+      <div class="sfb-sort">
+        <label class="field-label" for="shop-sort" style="display:inline;margin-right:8px;">Sort:</label>
+        <select class="field-select" id="shop-sort" style="width:auto;padding:7px 36px 7px 12px;">
+          <option value="date-desc">Newest First</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="shop-sidebar" aria-label="Product filters">
+      <div class="sf-group">
+        <div class="sf-title">Resin Colour</div>
+        <div class="sfb-swatches" role="group" aria-label="Filter by colour">
+          {[
+            ['linear-gradient(135deg,#1a3a5c,#2e6da4)','Blue'],
+            ['linear-gradient(135deg,#6b1a8a,#a855c8)','Purple'],
+            ['linear-gradient(135deg,#8b0000,#c0392b)','Red'],
+            ['linear-gradient(135deg,#1a6b3a,#27ae60)','Green'],
+            ['linear-gradient(135deg,#b8860b,#f1c40f)','Gold'],
+            ['linear-gradient(135deg,#4a0e8f,#c0392b,#e67e22)','Galaxy'],
+            ['linear-gradient(135deg,#1c1c1c,#3a3a3a)','Black'],
+            ['linear-gradient(135deg,#8b1a4a,#c0527a)','Rose'],
+            ['linear-gradient(135deg,#e8d5b7,#d4af7a)','Champagne'],
+          ].map(([grad, label]) => (
+            <button
+              class="colour-swatch"
+              style={`background:${grad}`}
+              title={label}
+              aria-label={label}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div class="sf-group">
+        <div class="sf-title">Availability</div>
+        <label class="sf-item">
+          <input type="checkbox" checked class="sf-check-input" value="in-stock" />
+          <span class="sf-check" aria-hidden="true"></span>
+          <span class="sf-name">In Stock</span>
+        </label>
+        <label class="sf-item">
+          <input type="checkbox" class="sf-check-input" value="sold-out" />
+          <span class="sf-check" aria-hidden="true"></span>
+          <span class="sf-name">Sold Out</span>
+        </label>
+      </div>
+
+      <div class="sf-group">
+        <div class="sf-title">Style</div>
+        {['Classic Resin','Galaxy / Shimmer','Earth Tones','Two-Colour Pour'].map(s => (
+          <label class="sf-item">
+            <input type="checkbox" class="sf-check-input" />
+            <span class="sf-check" aria-hidden="true"></span>
+            <span class="sf-name">{s}</span>
+          </label>
+        ))}
+      </div>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <main class="shop-products" id="main-content">
+      <div class="products-grid" role="list">
+        {PRODUCTS.map((product, i) => (
+          <>
+            {i === 6 && (
+              <div class="grid-banner bg-dark" role="listitem">
+                <svg style="position:absolute;inset:0;opacity:.08;width:100%;height:100%;" viewBox="0 0 900 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <path d="M0 40 Q225 26 450 48 Q675 70 900 38" stroke="#C4872A" stroke-width="1" fill="none"/>
+                  <path d="M0 110 Q200 96 400 118 Q650 144 900 108" stroke="#A0693A" stroke-width="1.5" fill="none"/>
+                </svg>
+                <div style="position:relative;z-index:2;">
+                  <div class="eyebrow">Can't Find Exactly What You Want?</div>
+                  <h3 class="h-section text-cream" style="font-size:20px;margin-bottom:6px;">Commission a Custom Piece</h3>
+                  <p class="text-muted">Choose your resin colour, tell us the occasion, and we'll build it from scratch.</p>
+                </div>
+                <a href="/custom-orders/" class="btn btn-accent" style="flex-shrink:0;">Start a Commission</a>
+              </div>
+            )}
+            <div role="listitem">
+              <ProductCard product={product} />
+            </div>
+          </>
+        ))}
+      </div>
+
+      <nav class="shop-pagination" aria-label="Products pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">›</button>
+      </nav>
+    </main>
+  </div>
+
+  <BannerStrip
+    eyebrow="Not Sure Which to Choose?"
+    heading="Every Piece Is Already One of a Kind."
+    body="No two cedar planks grain the same. No two resin pours land identically. Whichever you pick, you're getting something no one else owns."
+    ctaPrimary="Commission Custom"
+    ctaPrimaryHref="/custom-orders/"
+    ctaSecondary="Learn the Process"
+    ctaSecondaryHref="/our-craft/"
+  />
+
+</BaseLayout>

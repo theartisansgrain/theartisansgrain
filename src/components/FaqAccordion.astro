@@ -1,0 +1,55 @@
+---
+// src/components/FaqAccordion.astro
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items:  FaqItem[];
+  dark?:  boolean;
+  grid?:  boolean;
+  id?:    string;
+}
+
+const {
+  items,
+  dark = false,
+  grid = false,
+  id   = `faq-${Math.random().toString(36).slice(2,7)}`,
+} = Astro.props;
+---
+
+<div
+  class={`faq-wrap ${grid ? 'faq-grid-2' : ''} ${dark ? 'faq-dark' : ''}`}
+  id={id}
+  style={grid ? 'display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(245,239,224,.06)' : ''}
+>
+  {items.map((item, i) => {
+    const itemId   = `${id}-item-${i}`;
+    const answerId = `${id}-answer-${i}`;
+    return (
+      <div class={`faq-item ${dark ? 'faq-dark' : ''}`} style={grid ? 'background:var(--text-dark);padding:28px' : ''}>
+        <button
+          class="faq-question"
+          aria-expanded="false"
+          aria-controls={answerId}
+          id={itemId}
+        >
+          <span class="faq-question-text">{item.q}</span>
+          <svg class="faq-chevron" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 4 l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div
+          class="faq-answer"
+          id={answerId}
+          role="region"
+          aria-labelledby={itemId}
+        >
+          {item.a}
+        </div>
+      </div>
+    );
+  })}
+</div>

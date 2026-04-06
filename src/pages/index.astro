@@ -1,123 +1,111 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+// src/pages/index.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ProductCard from '@components/ProductCard.astro';
+import BannerStrip from '@components/BannerStrip.astro';
+import { PRODUCTS, TESTIMONIALS, SITE } from '@data/site';
+
+const featured = PRODUCTS.slice(0, 3);
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7BQ85EL9Y"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-D7BQ85EL9Y');
-  </script>
-  <meta name="google-site-verification" content="_jQne1G__ZzXpSz4ojNxJkuPGxLry6Dmc83UiF7Bkyk" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Artisan's Grain</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background-color: #f4efe8;
-      color: #4e3629;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 20px;
-    }
+<BaseLayout title={SITE.name} description={SITE.desc}>
 
-    img.logo {
-      max-width: 160px;
-      margin-bottom: 20px;
-    }
+  <Hero
+    eyebrow="Handcrafted in Texas"
+    title="Made by Hand.<br><em>Worn with Pride.</em>"
+    quote="Cedar, resin, and twelve steps of care. Every bow tie numbered, signed, and yours alone."
+    height={520}
+  />
 
-    h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
+  <!-- FEATURED PRODUCTS -->
+  <section class="section-wrap bg-cream">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">The Collection</div>
+        <h2 class="h-section">Latest Pieces</h2>
+      </div>
+      <a href="/shop/" class="btn btn-primary btn-sm">View All</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      {featured.map(p => <ProductCard product={p} />)}
+    </div>
+  </section>
 
-    h2 {
-      font-size: 1.2rem;
-      color: #c16e4a;
-      margin-top: 10px;
-    }
+  <!-- CRAFT INTRO SPLIT -->
+  <section class="split-grid" aria-label="About the craft">
+    <div class="panel-mid">
+      <svg style="position:absolute;inset:0;opacity:.12;width:100%;height:100%;" viewBox="0 0 500 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M0 40 Q125 28 250 44 Q375 60 500 38" stroke="#F5EFE0" stroke-width="1.5" fill="none"/>
+        <path d="M0 110 Q100 96 200 114 Q350 134 500 104" stroke="#F5EFE0" stroke-width="1" fill="none"/>
+        <path d="M0 190 Q80 177 160 196 Q280 218 500 183" stroke="#F5EFE0" stroke-width="2" fill="none"/>
+        <path d="M0 280 Q140 267 280 287 Q400 304 500 272" stroke="#F5EFE0" stroke-width="1" fill="none"/>
+        <path d="M0 375 Q100 363 200 380 Q320 398 500 368" stroke="#F5EFE0" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div style="position:relative;z-index:2;width:190px;height:190px;border-radius:50%;border:1px solid rgba(245,239,224,.15);background:rgba(30,12,4,.3);display:flex;align-items:center;justify-content:center;">
+        <img src="/images/logo.png" alt={SITE.name} width="150" height="150" style="border-radius:50%;object-fit:contain;" />
+      </div>
+    </div>
+    <div class="panel-light">
+      <div class="eyebrow">The Craft</div>
+      <h2 class="h-section" style="margin-bottom:20px;">Cedar. Resin. Twelve Steps.</h2>
+      <p class="body-copy" style="margin-bottom:16px;">We work exclusively with western red cedar — laser-cut to shape, then hand-routed, poured with custom epoxy resin, cured, sanded, oiled, waxed, and stitched. Twelve steps. One piece at a time.</p>
+      <p class="body-copy" style="margin-bottom:28px;">Every bow tie is numbered and signed on the back. No batch production, no shortcuts, no two pieces alike.</p>
+      <a href="/our-craft/" class="btn btn-primary">See How It's Made</a>
+    </div>
+  </section>
 
-    .about {
-      max-width: 600px;
-      margin: 40px auto;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
+  <!-- VALUES STRIP -->
+  <section class="section-wrap bg-dark" aria-label="Our founding principles">
+    <div class="eyebrow text-accent" style="text-align:center;margin-bottom:10px;">What Drives Us</div>
+    <h2 class="h-section text-cream" style="text-align:center;margin-bottom:40px;">Our Founding Principles</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(245,239,224,.08);">
+      {[
+        ['01','No Shortcuts',     "Twelve grits of sandpaper. Three coats of finish. Every single time."],
+        ['02','Honest Materials', "Western red cedar, exclusively. Food-safe epoxy. Hardware that lasts."],
+        ['03','Truly One of One',"No two pieces of cedar grain the same. No two resin pours match exactly."],
+        ['04','Made to Be Worn', "This isn't wall art. It clips on, adjusts, and survives a reception."],
+      ].map(([num, title, desc]) => (
+        <div class="card-dark" style="padding:36px 28px;">
+          <div style="font-family:var(--font-serif);font-size:36px;font-weight:700;color:var(--accent);opacity:.25;margin-bottom:12px;">{num}</div>
+          <div style="font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--cream);margin-bottom:10px;">{title}</div>
+          <p class="text-muted">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-    form {
-      margin-top: 30px;
-    }
+  <!-- TESTIMONIALS -->
+  {TESTIMONIALS.length > 0 && (
+    <section class="section-wrap bg-cream-d" aria-label="Customer testimonials">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">Customer Stories</div>
+          <h2 class="h-section">Worn &amp; Loved</h2>
+        </div>
+        <p class="section-right-note">From wedding days to gallery openings, here's what customers say.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+        {TESTIMONIALS.map(t => (
+          <div class="card">
+            <div style="color:var(--accent);font-size:14px;margin-bottom:12px;">{'★'.repeat(t.stars)}</div>
+            <p class="body-copy" style="font-style:italic;margin-bottom:16px;">"{t.text}"</p>
+            <div style="font-family:var(--font-serif);font-size:11px;color:var(--brown-light);letter-spacing:.08em;">— {t.author}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
 
-    input[type="email"] {
-      padding: 10px;
-      width: 250px;
-      max-width: 90%;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
+  <!-- COMMISSION CTA -->
+  <BannerStrip
+    eyebrow="Commission a Piece"
+    heading="Built for You. Nobody Else."
+    body="Pick the resin colour, tell us the occasion, and we'll build it from scratch. Same lifetime guarantee. Same twelve steps."
+    ctaPrimary="Start a Commission"
+    ctaPrimaryHref="/custom-orders/"
+    ctaSecondary="Browse the Shop"
+    ctaSecondaryHref="/shop/"
+  />
 
-    button {
-      padding: 10px 20px;
-      background-color: #4e3629;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      margin-left: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    footer {
-      margin-top: 60px;
-      font-size: 0.85rem;
-      color: #999;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Logo here -->
-  <img src="https://raw.githubusercontent.com/theartisansgrain/landingpage/refs/heads/main/src/components/TAG_LOGO_JAR.svg" alt="The Artisan’s Grain logo" class="logo" />
-
-  <h1>The Artisan’s Grain</h1>
-  <h2>Grain by Grain. A Work of Heart.</h2>
-
-  <div class="about">
-    <p>
-      At <strong>The Artisan’s Grain</strong>, we believe even the smallest grain can spark something meaningful. Grain by grain, each wooden bow tie is handcrafted. Our wooden epoxy bow ties are truly a work of heart! An idae as a gift to my groomsmen that started it all.
-Visit our online store!
-    </p>
-<a href="https://theartisansgrain.square.site" style="color: #fff; text-decoration: none; background-color: #4e3629; padding: 10px; border-radius: 10px;">
-<strong>Shop Now</strong>
-</a>
-<p></p>
-<a target="_blank" href="https://www.surveymonkey.com/r/Y9Z6ZJD" style="color: #fff; text-decoration: none; background-color: #4e3629; padding: 10px; border-radius: 10px;">
-<strong>survey</strong></a>
-  </div>
-
-  <!--<form>
-    <input type="email" placeholder="Your email address" required />
-    <button type="submit">Notify Me</button>
-  </form>-->
-
-  <footer>
-    &copy; 2025 The Artisan’s Grain. All rights reserved.
-  </footer>
-
-</body>
-</html>
+</BaseLayout>

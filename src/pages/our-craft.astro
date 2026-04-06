@@ -1,0 +1,200 @@
+---
+// src/pages/our-craft.astro
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import BannerStrip from '@components/BannerStrip.astro';
+
+const craftSteps = [
+  ['08','Shaping & Routing',  "The laser-cut blank is hand-shaped and profiled to final form. Channels are routed by hand to accept the resin inlay — every depth dialed in by feel and eye."],
+  ['03','Resin Pour',          "Custom-tinted epoxy mixed and poured into the routed channels. Every colour blended by hand using professional pigments and mica powders."],
+  ['04–07','Epoxy Cure Time', "The poured resin cures undisturbed across several days. This is the part of the process we cannot rush — and we never try."],
+  ['09','Sanding',             "Sanded through multiple grits from coarse to ultra-fine. The cured epoxy leveled flush with the cedar surface throughout."],
+  ['10','Oil',                 "A hand-rubbed natural oil worked into the cedar. It penetrates the wood, enriches the grain colour, and builds protection from within."],
+  ['11','Wax',                 "Buffed with a hand-applied finishing wax that seals, protects, and creates a soft natural sheen that improves the more you handle it."],
+];
+
+const finishing = [
+  ['10','Oil',                'Penetrating Finish', "A natural penetrating oil worked in by hand, coat by coat. It feeds the cedar from within — deepening the colour, enhancing the grain, and building protection that won't chip."],
+  ['11','Wax',                'Surface Seal',       "Buffed to a soft, natural sheen. Seals the surface against moisture and wear while keeping the look organic — not plastic, not glossy."],
+  ['12','Ribbon & Neck Strap','The Wearable Part',  "The ribbon and adjustable neck strap are hand-sewn on — the step that turns a crafted object into something you actually wear."],
+];
+
+const colours = [
+  ['linear-gradient(135deg,#1a3a5c,#2e6da4)','Midnight Blue'],
+  ['linear-gradient(135deg,#6b1a8a,#a855c8)','Violet'],
+  ['linear-gradient(135deg,#8b0000,#c0392b)','Deep Red'],
+  ['linear-gradient(135deg,#1a6b3a,#27ae60)','Forest Green'],
+  ['linear-gradient(135deg,#b8860b,#f1c40f)','Gold'],
+  ['linear-gradient(135deg,#1a4a6b,#2e86c1,#8e44ad)','Ocean Blend'],
+  ['linear-gradient(135deg,#1c1c1c,#3a3a3a)','Onyx'],
+];
+---
+
+<BaseLayout
+  title="Our Craft"
+  description="How we make each bow tie — from western red cedar selection and laser cutting through twelve steps of handcraft to ribbon and strap."
+>
+  <Hero
+    eyebrow="The Artisan's Craft"
+    title="Where Cedar<br>Becomes <em>Wearable.</em>"
+    quote="Every tool mark is a decision. Every grain line is a gift from the tree."
+    height={420}
+  />
+
+  <!-- CEDAR PHILOSOPHY -->
+  <div class="split-grid">
+    <div class="panel-mid">
+      <svg style="position:absolute;inset:0;opacity:.12;width:100%;height:100%;" viewBox="0 0 500 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M0 40 Q125 28 250 44 Q375 60 500 38" stroke="#F5EFE0" stroke-width="1.5" fill="none"/>
+        <path d="M0 130 Q100 116 200 134 Q350 155 500 124" stroke="#F5EFE0" stroke-width="1" fill="none"/>
+        <path d="M0 240 Q140 226 280 246 Q400 264 500 236" stroke="#F5EFE0" stroke-width="2" fill="none"/>
+        <path d="M0 360 Q100 348 200 365 Q320 382 500 355" stroke="#F5EFE0" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:22px;">
+        <div style="width:220px;height:220px;border-radius:50%;border:1px solid rgba(245,239,224,.18);display:flex;align-items:center;justify-content:center;background:rgba(30,12,4,.35);">
+          <div style="width:170px;height:170px;border-radius:50%;border:1px solid rgba(196,135,42,.3);display:flex;align-items:center;justify-content:center;">
+            <!-- Cedar tree -->
+            <svg viewBox="0 0 90 90" fill="none" aria-hidden="true">
+              <rect x="41" y="62" width="8" height="18" rx="2" fill="#6B3D22" opacity=".8"/>
+              <polygon points="45,14 22,42 68,42" fill="#8B5A30" opacity=".5"/>
+              <polygon points="45,22 25,48 65,48" fill="#A0693A" opacity=".6"/>
+              <polygon points="45,30 28,55 62,55" fill="#C4872A" opacity=".55"/>
+              <polygon points="45,38 31,62 59,62" fill="#A0693A" opacity=".7"/>
+            </svg>
+          </div>
+        </div>
+        <div style="font-family:var(--font-serif);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,239,224,.3);">Western Red Cedar · Exclusively</div>
+      </div>
+    </div>
+    <div class="panel-light">
+      <div class="eyebrow">Our Wood</div>
+      <h2 class="h-section" style="margin-bottom:22px;">One Wood. Chosen Deliberately.</h2>
+      <p class="body-copy" style="margin-bottom:16px;">We work with western red cedar and nothing else. That's a deliberate choice, not a limitation. Cedar is lightweight, aromatic, and carries a warmth in its grain that no other species matches. It holds a finish beautifully, machines cleanly under the laser, and responds to oil and wax in a way that deepens with every wear.</p>
+      <p class="body-copy" style="margin-bottom:28px;">Other woods are beautiful. We've tried many of them. But cedar is the one that felt right for a bow tie — light enough to forget you're wearing it, distinctive enough that people ask about it.</p>
+      <div style="display:flex;gap:32px;padding-top:24px;border-top:1px solid var(--cream-deeper);">
+        {[['1','Wood Species Used'],['12','Steps to Completion'],['0','Shortcuts Taken']].map(([n,l]) => (
+          <div>
+            <div class="stat-num">{n}</div>
+            <div class="stat-label">{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- LASER CUTTING -->
+  <section class="section-wrap bg-dark">
+    <div class="split-grid" style="gap:64px;align-items:center;">
+      <div>
+        <div class="eyebrow">Precision First</div>
+        <h2 class="h-section text-cream" style="margin-bottom:20px;">Laser-Cut. Then Handcrafted.</h2>
+        <p class="body-copy" style="color:rgba(245,239,224,.65);margin-bottom:14px;">Every bow tie begins with a single laser pass. The machine cuts the cedar to our bow tie template with precision no hand tool can reliably match — clean edges, exact geometry, zero guesswork. That laser cut is the starting line, not the finish line.</p>
+        <p class="body-copy" style="color:rgba(245,239,224,.65);margin-bottom:28px;">From that clean blank, everything else is done by hand. The laser sets the shape. We give it a soul.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          {['Exact Template','Clean Edges','Zero Guesswork','One at a Time'].map(p => (
+            <span class="pill pill-dark">{p}</span>
+          ))}
+        </div>
+      </div>
+      <!-- Laser diagram -->
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 380 320" fill="none" style="max-width:360px;width:100%;" aria-hidden="true">
+          <rect x="20" y="100" width="340" height="120" rx="4" fill="#3D2314" opacity=".6"/>
+          <path d="M20 130 Q100 122 180 133 Q260 144 360 128" stroke="#6B3D22" stroke-width="1.2" fill="none"/>
+          <path d="M20 168 Q110 160 220 170 Q290 178 360 162" stroke="#6B3D22" stroke-width="1" fill="none"/>
+          <rect x="160" y="20" width="60" height="40" rx="4" fill="#1A1A1A" stroke="#444" stroke-width="1"/>
+          <circle cx="190" cy="46" r="6" fill="#C4872A" opacity=".9"/>
+          <circle cx="190" cy="46" r="3" fill="#E8A84A"/>
+          <line x1="190" y1="60" x2="190" y2="98" stroke="#C4872A" stroke-width="2" stroke-dasharray="4 3" opacity=".9"/>
+          <ellipse cx="190" cy="110" rx="14" ry="4" fill="#C4872A" opacity=".25"/>
+          <path d="M80 160 C95 140 140 138 190 160 C140 182 95 180 80 160Z" stroke="#E8A84A" stroke-width="1.5" fill="rgba(196,135,42,0.08)" stroke-dasharray="5 3"/>
+          <path d="M300 160 C285 140 240 138 190 160 C240 182 285 180 300 160Z" stroke="#E8A84A" stroke-width="1.5" fill="rgba(196,135,42,0.08)" stroke-dasharray="5 3"/>
+          <path d="M178 152 C182 156 182 164 178 168 L202 168 C198 164 198 156 202 152Z" stroke="#E8A84A" stroke-width="1.5" fill="rgba(196,135,42,0.15)" stroke-dasharray="5 3"/>
+          <line x1="30" y1="20" x2="30" y2="300" stroke="#333" stroke-width="2"/>
+          <line x1="350" y1="20" x2="350" y2="300" stroke="#333" stroke-width="2"/>
+          <rect x="148" y="12" width="84" height="12" rx="3" fill="#2A2A2A" stroke="#444" stroke-width=".8"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- HANDCRAFT STEPS -->
+  <section class="section-wrap bg-cream">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">The Handwork</div>
+        <h2 class="h-section">From Blank to Bow Tie</h2>
+      </div>
+      <p class="section-right-note">After the laser sets the shape, every step that follows is done by hand.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--cream-deeper);">
+      {craftSteps.map(([num, title, desc]) => (
+        <div class="process-step" style="gap:20px;">
+          <div style="font-family:var(--font-sans);font-size:10px;font-weight:600;color:var(--accent);letter-spacing:.15em;flex-shrink:0;margin-top:2px;min-width:52px;">Step {num}</div>
+          <div>
+            <div class="ps-title">{title}</div>
+            <p class="ps-desc">{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- RESIN -->
+  <section class="section-wrap bg-accent">
+    <div class="split-grid" style="gap:56px;align-items:center;">
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <svg width="240" height="240" viewBox="0 0 260 260" fill="none" aria-hidden="true">
+          <path d="M130 20 A110 110 0 0 1 225 75 L130 130 Z" fill="#1B5E8A" opacity=".85"/>
+          <path d="M225 75 A110 110 0 0 1 240 155 L130 130 Z" fill="#8E44AD" opacity=".85"/>
+          <path d="M240 155 A110 110 0 0 1 185 235 L130 130 Z" fill="#C0392B" opacity=".85"/>
+          <path d="M185 235 A110 110 0 0 1 75 235 L130 130 Z" fill="#E67E22" opacity=".85"/>
+          <path d="M75 235 A110 110 0 0 1 20 155 L130 130 Z" fill="#27AE60" opacity=".85"/>
+          <path d="M20 155 A110 110 0 0 1 35 75 L130 130 Z" fill="#2C3E50" opacity=".85"/>
+          <path d="M35 75 A110 110 0 0 1 130 20 L130 130 Z" fill="#F1C40F" opacity=".85"/>
+          <circle cx="130" cy="130" r="55" fill="#6B3D22"/>
+          <circle cx="130" cy="130" r="44" stroke="#8B5A30" stroke-width="1" fill="none" opacity=".5"/>
+          <circle cx="130" cy="130" r="6" fill="#C4872A" opacity=".6"/>
+        </svg>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:rgba(245,239,224,.7)">The Colour</div>
+        <h2 class="h-section text-cream" style="margin-bottom:18px;">Every Pour Mixed by Hand.</h2>
+        <p class="body-copy" style="color:rgba(245,239,224,.85);margin-bottom:14px;">We don't order pre-tinted epoxy. Every colour is mixed fresh in our shop using professional-grade pigments and mica powders — measured by eye, adjusted by feel, tested on scrap cedar before a single drop touches your piece.</p>
+        <p class="body-copy" style="color:rgba(245,239,224,.85);margin-bottom:24px;">That means the midnight blue in one bow tie will never be exactly the same midnight blue in the next. That's not an accident. That's the whole point.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          {colours.map(([grad]) => (
+            <div style={`width:36px;height:36px;border-radius:50%;background:${grad};border:2px solid rgba(245,239,224,.3);`}></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINISHING -->
+  <section class="section-wrap bg-cream-d">
+    <div class="eyebrow">The Final Steps</div>
+    <h2 class="h-section" style="margin-bottom:40px;">Oil. Wax. Ribbon. Done.</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+      {finishing.map(([num, name, sub, desc]) => (
+        <div class="card card-accent-border">
+          <div class="eyebrow" style="margin-bottom:6px;">Step {num}</div>
+          <div class="h-card">{name}</div>
+          <div style="font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brown-light);margin-bottom:12px;">{sub}</div>
+          <p class="body-copy" style="font-size:12px;">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <BannerStrip
+    eyebrow="Why It Matters"
+    heading="A Bow Tie You Can Feel the Difference In."
+    body="When you pick up a bow tie from The Artisan's Grain, the weight is right, the finish is smooth, and the cedar has a warmth no synthetic material can fake. That's twelve steps of care — and it shows."
+    ctaPrimary="Shop the Collection"
+    ctaPrimaryHref="/shop/"
+    ctaSecondary="Commission a Custom Piece"
+    ctaSecondaryHref="/custom-orders/"
+  />
+
+</BaseLayout>

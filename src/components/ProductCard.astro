@@ -1,0 +1,63 @@
+---
+// src/components/ProductCard.astro
+import type { Product } from '@data/site';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const { pieceNum, name, resin, price, inStock, isNew, isLimited, slug, resinGrad } = product;
+
+const badgeText  = !inStock ? 'Sold Out' : isNew ? 'New' : isLimited ? 'Last One' : null;
+const badgeClass = !inStock ? 'pc-badge-sold' : isNew ? 'pc-badge-new' : 'pc-badge-limited';
+---
+
+<article class="product-card" itemscope itemtype="https://schema.org/Product">
+  {badgeText && <span class={`pc-badge ${badgeClass}`}>{badgeText}</span>}
+
+  <a href={`/shop/${slug}/`} class="pc-image" aria-label={name}>
+    <!-- Bow tie SVG placeholder — replace with <img> once photos are available -->
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:180px;">
+      <!-- Cedar body -->
+      <path d="M14 90 C28 52 70 48 140 90 C70 132 28 128 14 90Z" fill="#6B3D22" stroke="#8B5A30" stroke-width="1.2"/>
+      <path d="M266 90 C252 52 210 48 140 90 C210 132 252 128 266 90Z" fill="#6B3D22" stroke="#8B5A30" stroke-width="1.2"/>
+      <path d="M122 68 C128 76 128 104 122 112 L158 112 C152 104 152 76 158 68Z" fill="#5C3418" stroke="#8B5A30" stroke-width="1.2"/>
+      <!-- Grain lines -->
+      <path d="M25 80 Q140 68 255 80" stroke="#A0693A" stroke-width="1" fill="none" opacity=".4"/>
+      <path d="M25 90 Q140 78 255 90" stroke="#8B5A30" stroke-width="1.2" fill="none" opacity=".5"/>
+      <path d="M25 100 Q140 88 255 100" stroke="#A0693A" stroke-width="1" fill="none" opacity=".4"/>
+      <!-- Resin channel - filled with product gradient -->
+      <defs>
+        <linearGradient id={`grad-${slug}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="var(--resin-start, #1a3a5c)"/>
+          <stop offset="100%" stop-color="var(--resin-end, #2e6da4)"/>
+        </linearGradient>
+      </defs>
+      <path d="M28 84 Q140 74 252 84" stroke={`url(#grad-${slug})`} stroke-width="4" fill="none"/>
+      <path d="M28 92 Q140 82 252 92" stroke={`url(#grad-${slug})`} stroke-width="3.5" fill="none" opacity=".8"/>
+      <path d="M28 100 Q140 90 252 100" stroke={`url(#grad-${slug})`} stroke-width="3" fill="none" opacity=".6"/>
+    </svg>
+
+    <!-- Resin colour indicator -->
+    <div style={`position:absolute;bottom:12px;right:12px;width:18px;height:18px;border-radius:50%;background:${resinGrad};border:2px solid rgba(245,239,224,.3);`} aria-hidden="true"></div>
+  </a>
+
+  <div class="pc-body">
+    <div class="piece-num" itemprop="sku">Piece No. {pieceNum}</div>
+    <div class="pc-name" itemprop="name">
+      <a href={`/shop/${slug}/`}>{name}</a>
+    </div>
+    <div class="pc-wood">Western Red Cedar · {resin}</div>
+    <div class="pc-footer" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <span class="pc-price" itemprop="price" content={String(price)}>
+        ${price}
+      </span>
+      {inStock ? (
+        <a href={`/shop/${slug}/`} class="btn btn-primary btn-sm">Add to Cart</a>
+      ) : (
+        <span class="btn btn-sm" style="background:var(--cream-deeper);color:var(--text-mid);cursor:default;">Sold Out</span>
+      )}
+    </div>
+  </div>
+</article>
