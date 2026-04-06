@@ -541,3 +541,13 @@ hr {
     }
 
     .bowtie-svg { width: 100px; height: 80px; }
+
+    @media handheld, only screen and (max-width: 767px) {
+      .hero { flex-direction: column; }
+      .hero-right { position: relative; top: unset; right: unset; transform: none; margin-bottom: 40px; }
+      .value-bar { flex-direction: column; justify-content: center; gap: 12px; padding: 16px 24px;}
+      .vb-item { justify-content: center; }
+      .products-grid { grid-template-columns: repeat(1, 1fr); }
+      .craft-section { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: repeat(1, 1fr); }
+    }
