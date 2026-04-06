@@ -3,7 +3,7 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
 :root {
   --accent: #2337ff;
   --accent-dark: #000d8a;
@@ -153,3 +153,391 @@ hr {
   /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
+
+
+
+
+ @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brown: #3D2314;
+      --brown-mid: #6B3D22;
+      --brown-light: #A0693A;
+      --cream: #F5EFE0;
+      --cream-dark: #E8DFC8;
+      --cream-deeper: #D4C5A9;
+      --text-dark: #2A1709;
+      --text-mid: #5C3D22;
+      --accent: #C4872A;
+    }
+    body { background: var(--cream); font-family: 'Raleway', sans-serif; }
+
+    /* NAV - light cream */
+    nav {
+      background: var(--cream);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1.5px solid var(--cream-deeper);
+      position: relative; z-index: 20;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 14px; }
+    .nav-logo img { width: 50px; height: 50px; border-radius: 50%; }
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      color: var(--brown);
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+    .nav-brand span {
+      display: block; font-size: 10px;
+      color: var(--brown-light); letter-spacing: 0.2em;
+      font-weight: 400; font-family: 'Raleway', sans-serif;
+      text-transform: uppercase; margin-top: 2px;
+    }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      font-family: 'Cinzel', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-dark); text-decoration: none; cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    a.nav-cart {
+      background: var(--brown); color: var(--cream);
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 9px 20px; border: none; cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* HERO with wood-grain SVG background */
+    .hero {
+      position: relative;
+      min-height: 560px;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: var(--brown);
+      z-index: 0;
+    }
+    /* Layered wood-grain texture using SVG data URI */
+    .hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='560'%3E%3Cdefs%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.003' numOctaves='6' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='800' height='560' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: cover;
+      mix-blend-mode: overlay;
+      opacity: 0.55;
+      z-index: 1;
+    }
+    /* Grain lines overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        180deg,
+        transparent 0px,
+        transparent 6px,
+        rgba(255,220,160,0.025) 6px,
+        rgba(255,220,160,0.025) 7px,
+        transparent 7px,
+        transparent 18px,
+        rgba(0,0,0,0.04) 18px,
+        rgba(0,0,0,0.04) 19px
+      );
+      z-index: 2;
+    }
+    /* Wavy grain lines SVG overlay */
+    .hero-grain-svg {
+      position: absolute; inset: 0; z-index: 3;
+      opacity: 0.18; pointer-events: none;
+    }
+    /* Dark vignette overlay so text stays readable */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 4;
+      background: linear-gradient(
+        105deg,
+        rgba(30,12,4,0.72) 0%,
+        rgba(30,12,4,0.55) 50%,
+        rgba(30,12,4,0.25) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 5;
+      padding: 80px 48px;
+      max-width: 580px;
+    }
+    .hero-eyebrow {
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif; font-size: 52px; font-weight: 700;
+      color: var(--cream); line-height: 1.1; margin-bottom: 22px;
+      letter-spacing: 0.01em;
+    }
+    .hero-title em { color: var(--accent); font-style: normal; display: block; }
+    .hero-sub {
+      font-family: 'Raleway', sans-serif; font-size: 15px; font-weight: 300;
+      color: rgba(245,239,224,0.75); line-height: 1.75;
+      margin-bottom: 40px; max-width: 440px;
+    }
+    .hero-ctas { display: flex; gap: 16px; align-items: center; }
+    .hero-cta-primary {
+      background: var(--accent); color: var(--cream);
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 15px 36px; border: none; cursor: pointer;
+      text-decoration: none;
+    }
+    .hero-cta-secondary {
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(245,239,224,0.65); border-bottom: 1px solid rgba(245,239,224,0.3);
+      padding-bottom: 2px; cursor: pointer; text-decoration: none;
+    }
+    .hero-right {
+      position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
+      z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .hero-medallion {
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 1px solid rgba(245,239,224,0.18);
+      background: rgba(30,12,4,0.4);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+    .hero-medallion img { width: 124px; height: 124px; object-fit: contain; }
+    .hero-medallion-label {
+      font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: rgba(245,239,224,0.35);
+    }
+    .hero-stats {
+      display: flex; gap: 28px; margin-top: 8px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700;
+      color: var(--accent); display: block; line-height: 1;
+    }
+    .hero-stat-lbl {
+      font-family: 'Raleway', sans-serif; font-size: 9px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(245,239,224,0.4); display: block; margin-top: 4px;
+    }
+
+    /* VALUE BAR */
+    .value-bar {
+      background: var(--accent); padding: 13px 48px;
+      display: flex; justify-content: center; gap: 56px;
+    }
+    .vb-item {
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .vb-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(245,239,224,0.5); }
+
+    /* SECTION BELOW */
+    .section { padding: 80px 48px; background: var(--cream); }
+    .section-label {
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif; font-size: 34px; font-weight: 600;
+      color: var(--brown); margin-bottom: 14px;
+    }
+    .section-sub {
+      font-family: 'Raleway', sans-serif; font-size: 14px; font-weight: 300;
+      color: var(--text-mid); line-height: 1.7; max-width: 500px; margin-bottom: 48px;
+    }
+    .products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .product-card {
+      background: white; border: 1px solid var(--cream-deeper); overflow: hidden; cursor: pointer;
+    }
+    .product-img {
+      height: 300px; background: var(--cream-dark);
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .product-badge-new {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--brown); color: var(--cream);
+      font-family: 'Raleway', sans-serif; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px;
+    }
+    .product-info { padding: 20px; }
+    .product-wood {
+      font-family: 'Raleway', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .product-name { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 600; color: var(--brown); margin-bottom: 8px; }
+    .product-desc { font-family: 'Raleway', sans-serif; font-size: 12px; font-weight: 300; color: var(--text-mid); line-height: 1.6; margin-bottom: 16px; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 600; color: var(--brown); }
+    .product-btn {
+      background: var(--brown); color: var(--cream);
+      font-family: 'Raleway', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 18px; border: none; cursor: pointer; text-decoration: none;
+    }
+
+
+    /* CRAFT SECTION */
+    .craft-section {
+      background: var(--text-dark);
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .craft-text .section-label { color: var(--accent); }
+    .craft-text .section-title { color: var(--cream); }
+    .craft-text .section-sub { color: rgba(245,239,224,0.65); margin-bottom: 32px; }
+    .craft-steps { display: flex; flex-direction: column; gap: 20px; }
+    .craft-step { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.5;
+      min-width: 36px;
+      line-height: 1;
+    }
+    .step-text h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .step-text p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(245,239,224,0.6);
+      line-height: 1.6;
+    }
+    .craft-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .craft-logo-frame {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,239,224,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245,239,224,0.04);
+    }
+    .craft-logo-frame img { width: 200px; height: 200px; object-fit: contain; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--cream-dark); padding: 80px 40px; text-align: center; }
+    .testimonials .section-label { justify-content: center; display: block; }
+    .testimonials .section-title { text-align: center; margin-left: auto; margin-right: auto; }
+    .testimonials .section-sub { text-align: center; margin-left: auto; margin-right: auto; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+    .testi-card {
+      background: var(--cream);
+      border: 1px solid var(--cream-deeper);
+      padding: 28px 24px;
+      text-align: left;
+    }
+    .stars { color: var(--accent); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+    .testi-text {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+    .testi-author {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brown);
+      letter-spacing: 0.08em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--text-dark);
+      padding: 48px 40px 28px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(245,239,224,0.1);
+      margin-bottom: 24px;
+    }
+    .footer-brand h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .footer-brand p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(245,239,224,0.5);
+      line-height: 1.7;
+    }
+    .footer-col h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(245,239,224,0.5);
+      text-decoration: none;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      color: rgba(245,239,224,0.3);
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo img { width: 32px; height: 32px; border-radius: 50%; opacity: 0.5; }
+
+    .divider-ornament {
+      text-align: center;
+      padding: 24px 0 0;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--accent);
+      opacity: 0.4;
+      letter-spacing: 8px;
+    }
+
+    .bowtie-svg { width: 100px; height: 80px; }
