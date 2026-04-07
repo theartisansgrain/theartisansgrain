@@ -1,16 +1,28 @@
 ---
-title: "Second post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 15 2022"
+title: "What Makes a Wooden Bow Tie Different"
+description: "Descusses the differences in wood versus tradional fabric bow ties"
+pubDate: "JulApril 7 2026"
 heroImage: "/blog-placeholder-4.jpg"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+At first glance, a wooden bow tie shares the same familiar silhouette as its fabric counterpart. It sits neatly at the collar, frames the face, and carries the same formal roots. But look closer, and the differences go far beyond material—they redefine what a bow tie can be.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+<strong>A Material That Tells a Story</strong>
+The most obvious difference is the use of real wood, but that choice changes everything. Unlike fabric, which is woven to look consistent, wood carries natural grain patterns, color variations, and subtle imperfections formed over years of growth. Each piece holds a visual history, making every bow tie inherently one of a kind.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+<strong>Structure Instead of Softness</strong>
+Traditional bow ties are flexible and shaped by folding fabric. A wooden bow tie, by contrast, is structured and sculpted. Its form is carefully cut, carved, and finished to maintain a clean, consistent shape. This gives it a crisp, polished look that doesn’t shift or lose form throughout the day.
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+<strong>Craftsmanship Over Mass Production</strong>
+While many fabric bow ties are machine-made in large quantities, wooden bow ties often involve hands-on craftsmanship. From selecting the wood to cutting, sanding, finishing, and sometimes combining materials like resin or fabric centers, each step requires precision. The process is slower, more intentional, and more personal.
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+<strong>A Blend of Natural and Modern Design</strong>
+Wooden bow ties often push beyond tradition by incorporating mixed materials—resin pours, engraved details, laser-cut patterns, or fabric accents in the center knot. This fusion of natural and modern elements creates a balance between rustic and refined, something fabric alone rarely achieves.
+
+<strong>Visual Depth and Texture</strong>
+Fabric relies on color and pattern for visual interest. Wood adds depth through grain, sheen, and texture. Light interacts differently with a wooden surface, highlighting curves and contours in a way that feels more dimensional. The result is subtle but striking.
+**Consistency in Wear**
+Because of its solid structure, a wooden bow tie doesn’t wrinkle, sag, or need constant adjustment. Once it’s on, it maintains its shape and presence. It offers a dependable look from the moment you put it on until the end of the day.
+
+<strong>A Distinctive Presence**</strong>
+Perhaps the biggest difference is how it’s perceived. A fabric bow tie can blend into formalwear traditions. A wooden one quietly disrupts them. It signals creativity, individuality, and an appreciation for detail without abandoning the elegance of classic style.
